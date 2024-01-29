@@ -1,6 +1,6 @@
 /* eslint-disable react-hooks/exhaustive-deps */
 import { useEffect, useState } from "react";
-import { createPlayer, updatePlayer } from "../services/playerService";
+import { createPlayer, getPlayer, updatePlayer } from "../services/playerService";
 import { useParams } from "react-router-dom";
 
 export default function AddPlayer(){
@@ -15,16 +15,17 @@ export default function AddPlayer(){
     });
 
     useEffect(()=>{
-        async function getPlayer(){
-            let response = await getPlayer(_id);
-            setPlayer(response.data);
+        async function getPlayerId(){
+            getPlayer(_id).then((response)=>{
+                setPlayer(response.data)
+            });
         }
 
         if(_id!=null){
-            getPlayer();
+            getPlayerId();
         }
 
-    }, [_id])
+    }, [])
 
     function handlePlayer(e){
         setPlayer({...player,[e.target.name]: e.target.value})
@@ -32,11 +33,11 @@ export default function AddPlayer(){
 
     function addPlayer(){
         createPlayer(player).then();
-        // let playerData = await createPlayer(playerData);
-        // setPlayer(playerData.data);
+        //setPlayer(.data);
     }
 
-    function update(){
+    function update(e){
+        e.preventDefault();
         updatePlayer(_id,player).then();
     }
 
