@@ -64,7 +64,7 @@ export default function AddPlayer(){
                     <input type="text" className="form-control" name="status" onChange={handlePlayer} value={player.status} />
                 </div>
 
-                {_id==null? <button type="submit" className="btn btn-primary" onClick={addPlayer}>Add Player</button> : <button type="submit" className="btn btn-primary" onClick={update}>Edit Player</button>}
+                {_id==null? <button type="submit" className="btn btn-primary" onClick={addPlayer}>Add Player</button> : <button type="submit" className="btn btn-warning" onClick={update}>Edit Player</button>}
             </form>
 
         </div>
